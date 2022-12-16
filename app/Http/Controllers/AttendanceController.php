@@ -23,14 +23,15 @@ class AttendanceController extends Controller
 
         $days = $previous->diffInDays($latest);
 
-        if (Attendance::exist()->first())
-        {
-            return back()->with('error', 'You Already Marked Your Attendance');
-        }
-        elseif (Attendance::leaves()->first())
+        if (Attendance::leaves()->first())
         {
             return back()->with('error', 'You Filled The Leave For Today');
         }
+        elseif (Attendance::exist()->first())
+        {
+            return back()->with('error', 'You Already Marked Your Attendance');
+        }
+        
         elseif ($days > 1)
         {
             $dateRange = CarbonPeriod::create($previousDate, Carbon::yesterday());

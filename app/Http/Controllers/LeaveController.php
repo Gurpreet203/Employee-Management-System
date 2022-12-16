@@ -13,14 +13,16 @@ class LeaveController extends Controller
     public function index()
     {
         return view('users.leaves', [
-            'leaves' => Leave::where('status', 'Pending')->get()
+            'leaves' => Leave::where('status', 'Pending')
+                ->with('user')
+                ->get()
         ]);
     }
 
     public function show()
     {
-        return view('users.leaves', [
-            'leaves' => Leave::get()
+        return view('users.leaves-list', [
+            'leaves' => Leave::with('user')->get()
         ]);
     }
 

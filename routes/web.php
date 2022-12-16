@@ -66,15 +66,15 @@ Route::middleware('auth')->group(function(){
 
         Route::post('/users/{user:slug}/status', UserStatusController::class)->name('users.status');
 
-        Route::controller(SetPasswordController::class)->group(function(){
+    });
+
+    Route::controller(SetPasswordController::class)->group(function(){
 
             Route::get('/{user:slug}/set-password', 'index')->name('set-password');
 
             Route::post('/{user:slug}/set-password', 'store')->name('set-password.store');
 
         });
-
-    });
 
     Route::get('/employee', [EmployeeController::class, 'index'])->name('employee.index');
 

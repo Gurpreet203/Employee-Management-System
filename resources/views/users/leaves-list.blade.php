@@ -11,8 +11,7 @@
             <th>Subject</th>
             <th>Description</th>
             <th>Dates</th>
-            <th>Reject</th>
-            <th>Approved</th>
+            <th>status</th>
         </tr>
 
         @if ($leaves->count()>0)
@@ -24,9 +23,7 @@
                     <td>{{$leave->subject}}</td>
                     <td>{{$leave->description}}</td>
                     <td>{{$leave->dates}}</td>
-                    <td><a href="{{route('leaves.status', $leave)}}?status=Rejected" class="btn btn-outline-danger m-1">Reject</a></td>
-                    <td><a href="{{route('leaves.status', $leave)}}?status=Approved" class="btn btn-outline-success">Approved</a></td>
-                    
+                    <td>{{$leave->status}}</td>                    
                 </tr>
                 
             @endforeach
