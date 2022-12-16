@@ -24,8 +24,7 @@ class Leave extends Model
     {
         return $query->where('user_id', Auth::id())
             ->whereNot('status', 'Rejected')
-            ->latest()
-            ->first();
+            ->latest();
     }
 
     //Attributes

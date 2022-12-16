@@ -14,6 +14,9 @@
 
         @if ($users->count()>0)
             @foreach ($users as $user)
+                @if ($user->role_id == 1)
+                    @continue
+                @endif
                 <tr>
                     <td>{{$user->name}}</td>
                     <td>{{$user->email}}</td>
@@ -46,16 +49,6 @@
                                         <i class="bi bi-wrench-adjustable"></i>
                                         <a href="{{ route('users.edit', $user) }}" confirm="want to proceed ? ">Edit</a>
                                     </div>
-                                </li>
-                                    
-                                <li>
-                                    <form action="" method="post">
-                                        @csrf
-                                        <div class="drop-items-icon">
-                                            <i class="bi bi-arrow-clockwise"></i>
-                                            <input type="submit" value="Reset Password" name="reset" class="drop-items">
-                                        </div>
-                                    </form>
                                 </li>
 
                                 <li>

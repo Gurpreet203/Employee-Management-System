@@ -13,7 +13,8 @@ class Attendance extends Model
     protected $fillable = [
         'user_id',
         'status',
-        'date'
+        'date',
+        'penality'
     ];
 
     public function scopeExist($query)
@@ -33,5 +34,11 @@ class Attendance extends Model
     {
         return $query->where('user_id', Auth::id())
             ->latest();
+    }
+
+    public function scopeAbsent($query)
+    {
+        return $query->where('user_id', Auth::id())
+            ->where('status', 'Absent');
     }
 }

@@ -16,12 +16,19 @@ class AttendanceController extends Controller
     public function store()
     {
         $now = now()->toDateString();
-        $previousDate = Attendance::latestDate()
+        if (Attendance::latestDate()->first())
+        {
+            $previousDate = Attendance::latestDate()
             ->first()->date;
-        $previous = Carbon::parse($previousDate);
-        $latest = Carbon::parse($now);
+            $previous = Carbon::parse($previousDate);
+            $latest = Carbon::parse($now);
 
-        $days = $previous->diffInDays($latest);
+            $days = $previous->diffInDays($latest);
+        }
+        else
+        {
+            $days = 0;
+        }
 
         if (Attendance::leaves()->first())
         {
@@ -40,12 +47,14 @@ class AttendanceController extends Controller
             ->map(function($date) {
                 return $date->format('Y-m-d');
             })
+            ->skip(1)
             ->each(function($date) {
 
                 Attendance::create([
                     'user_id' => Auth::id(),
                     'date' => $date,
-                    'status' => 'Absent'
+                    'status' => 'Absent',
+                    'penality' => 10
                 ]);
             });
         }

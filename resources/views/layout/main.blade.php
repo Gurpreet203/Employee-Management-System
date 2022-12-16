@@ -21,17 +21,18 @@
                 </li>
 
                 @admin
-                    <a href="{{ route('users.index') }}"><li><i class="bi bi-people-fill"></i> Users</li></a>
+                    <a href="{{ route('users.index') }}" id="{{ Request::url() == route('users.index') ? 'hovereffect' : '' }}"><li><i class="bi bi-people-fill"></i> Users</li></a>
 
-                    <a href="{{ route('leaves') }}"><li><i class="bi bi-files"></i> Pending Leaves</li></a>
+                    <a href="{{ route('leaves') }}" id="{{ Request::url() == route('leaves') ? 'hovereffect' : '' }}"><li><i class="bi bi-files"></i> Pending Leaves</li></a>
 
-                    <a href="{{ route('leaves.show') }}"><li><i class="bi bi-file-check"></i> Leaves</li></a>
+                    <a href="{{ route('leaves.show') }}" id="{{ Request::url() == route('leaves.show') ? 'hovereffect' : '' }}"><li><i class="bi bi-file-check"></i> Leaves</li></a>
 
                 @else
                     
-                    <a href="{{ route('attendance') }}" @if(App\Models\Attendance::exist(Auth::user())->first()) class="disable" @endif><li><i class="bi bi-person-check"></i> Attendance</li></a>
-                    <a href="{{ route('employee.index') }}"><li><i class="bi bi-list"></i> Leaves</li></a>
-                    <a href="{{ route('leaves.create') }}"><li><i class="bi bi-files"></i> Create Leave</li></a>
+                    <a href="{{ route('attendance') }}" @if(App\Models\Attendance::exist(Auth::user())->first()) class="disable" @endif id="{{ Request::url() == route('attendance') ? 'hovereffect' : '' }}"><li><i class="bi bi-person-check"></i> Attendance</li></a>
+                    <a href="{{ route('employee.index') }}" id="{{ Request::url() == route('employee.index') ? 'hovereffect' : '' }}"><li><i class="bi bi-list"></i> Leaves</li></a>
+                    <a href="{{ route('leaves.create') }}" id="{{ Request::url() == route('leaves.create') ? 'hovereffect' : '' }}"><li><i class="bi bi-files"></i> Create Leave</li></a>
+                    <a href="{{ route('penality.list') }}" id="{{ Request::url() == route('penality.list') ? 'hovereffect' : '' }}"><li><i class="bi bi-bookmark-x"></i> Penality</li></a>
 
                 @endadmin
             </ul>

@@ -22,7 +22,9 @@ class LeaveController extends Controller
     public function show()
     {
         return view('users.leaves-list', [
-            'leaves' => Leave::with('user')->get()
+            'leaves' => Leave::with('user')
+                ->whereNot('status', 'Pending')
+                ->get()
         ]);
     }
 
@@ -33,13 +35,20 @@ class LeaveController extends Controller
 
     public function store(Request $request)
     {
-        $dates = json_decode(Leave::LatestLeaveDates()->leave_dates);
-        $dateRange = CarbonPeriod::create($dates->start_date, $dates->end_date);
+        if (Leave::LatestLeaveDates()->first())
+        {
+            $dates = json_decode(Leave::LatestLeaveDates()->first()->leave_dates);
+            $dateRange = CarbonPeriod::create($dates->start_date, $dates->end_date);
 
-        $dateRange = collect($dateRange)
-            ->map(function($date) {
-                return $date->format('Y-m-d');
-            })->toArray();
+            $dateRange = collect($dateRange)
+                ->map(function($date) {
+                    return $date->format('Y-m-d');
+                })->toArray();
+        }
+        else
+        {
+            $dateRange = null;
+        }
 
         $attributes = $request->validate([
             'subject' => 'required|min:3|max:255',

@@ -25,5 +25,15 @@ class UserSeeder extends Seeder
             'status' => 1,
             'email_status' => 1
         ]);
+
+        User::create([
+            'role_id' => 2,
+            'first_name' => 'Gurpreet',
+            'last_name' => 'Singh',
+            'email' => 'gurpreet@yopmail.com',
+            'password' => Hash::make('123456789'),
+            'status' => 1,
+            'email_status' => 1
+        ]);
     }
 }

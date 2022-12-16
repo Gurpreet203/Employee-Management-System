@@ -29,7 +29,7 @@
             @endforeach
         @else
             </table>
-            <h2>No Leaves Pending</h2>
+            <h2>No Leaves Approved or Rejected</h2>
         @endif
     </table>
     </div>

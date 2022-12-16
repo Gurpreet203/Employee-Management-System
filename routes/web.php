@@ -66,6 +66,8 @@ Route::middleware('auth')->group(function(){
 
         Route::post('/users/{user:slug}/status', UserStatusController::class)->name('users.status');
 
+        Route::get('/leaves/{leave}/status', LeaveStatusController::class)->name('leaves.status');
+
     });
 
     Route::controller(SetPasswordController::class)->group(function(){
@@ -76,7 +78,12 @@ Route::middleware('auth')->group(function(){
 
         });
 
-    Route::get('/employee', [EmployeeController::class, 'index'])->name('employee.index');
+    Route::controller(EmployeeController::class)->group(function(){
+
+        Route::get('/employee', 'index')->name('employee.index');
+
+        Route::get('/employee/penalities', 'penality')->name('penality.list');
+    });
 
     Route::get('/attendance', [AttendanceController::class, 'store'])->name('attendance');
 
@@ -90,8 +97,6 @@ Route::middleware('auth')->group(function(){
 
         Route::post('/employee/leaves/store', 'store')->name('leaves.store');
     });
-
-    Route::get('/leaves/{leave}/status', LeaveStatusController::class)->name('leaves.status');
 
 });
 

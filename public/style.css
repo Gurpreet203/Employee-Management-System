@@ -49,7 +49,6 @@ body {
     display: block;
 }
 .side-bar ul li:hover {
-    background-color: white;
     color: rgb(24, 1, 56);
     background-color: rgb(243, 244, 246);
 }
@@ -142,4 +141,9 @@ body {
     margin-left: 20%;
     margin-top: 10%;
     padding: 20px;
+}
+
+#hovereffect li {
+    color: rgb(24, 1, 56);
+    background-color: rgb(243, 244, 246);
 }

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->enum('status', ['Present', 'Absent', 'Leave'])->default('Absent');
             $table->date('date');
+            $table->integer('penality')->default(0);
             $table->timestamps();
         });
     }

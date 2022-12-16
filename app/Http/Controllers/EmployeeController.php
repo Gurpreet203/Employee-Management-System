@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attendance;
 use App\Models\Leave;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,6 +14,13 @@ class EmployeeController extends Controller
             'leaves' => Leave::where('user_id', Auth::id())
                 ->latest()
                 ->get()
+        ]);
+    }
+
+    public function penality()
+    {
+        return view('employee.penality', [
+            'penalities' => Attendance::Absent()->get()
         ]);
     }
 }
