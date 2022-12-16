@@ -13,19 +13,20 @@ class LeaveStatusController extends Controller
 {
     public function __invoke(Request $request, Leave $leave)
     {
-        if ($request['status'] == 'Rejected')
+        if ($request['status'] == Leave::REJECTED)
         {
             $leave->update([
-                'status' => 'Rejected'
+                'status' => Leave::REJECTED
             ]);
-            Notification::send(User::find($leave->user_id), new LeaveRejectedNotification(Auth::user()));
+            $user = User::find($leave->user_id);
+            Notification::send($user, new LeaveRejectedNotification(Auth::user()));
 
             return back()->with('success', 'Successfully Rejected');
         }
-        elseif ($request['status'] == 'Approved')
+        elseif ($request['status'] == Leave::APPROVED)
         {
             $leave->update([
-                'status' => 'Approved'
+                'status' => Leave::APPROVED
             ]);
 
             $attendance = new AttendanceController();

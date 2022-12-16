@@ -11,7 +11,7 @@ class EmployeeController extends Controller
     public function index()
     {
         return view('employee.index', [
-            'leaves' => Leave::where('user_id', Auth::id())
+            'leaves' => Leave::visibleTo()
                 ->latest()
                 ->get()
         ]);

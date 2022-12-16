@@ -10,6 +10,10 @@ class Attendance extends Model
 {
     use HasFactory;
 
+    const PRESENT = 'Present';
+    const ABSENT = 'Absent';
+    const LEAVE = 'Leave';
+
     protected $fillable = [
         'user_id',
         'status',

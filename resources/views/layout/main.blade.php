@@ -30,7 +30,7 @@
                 @else
                     
                     <a href="{{ route('attendance') }}" @if(App\Models\Attendance::exist(Auth::user())->first()) class="disable" @endif id="{{ Request::url() == route('attendance') ? 'hovereffect' : '' }}"><li><i class="bi bi-person-check"></i> Attendance</li></a>
-                    <a href="{{ route('employee.index') }}" id="{{ Request::url() == route('employee.index') ? 'hovereffect' : '' }}"><li><i class="bi bi-list"></i> Leaves</li></a>
+                    <a href="{{ route('employees.index') }}" id="{{ Request::url() == route('employees.index') ? 'hovereffect' : '' }}"><li><i class="bi bi-list"></i> Leaves</li></a>
                     <a href="{{ route('leaves.create') }}" id="{{ Request::url() == route('leaves.create') ? 'hovereffect' : '' }}"><li><i class="bi bi-files"></i> Create Leave</li></a>
                     <a href="{{ route('penality.list') }}" id="{{ Request::url() == route('penality.list') ? 'hovereffect' : '' }}"><li><i class="bi bi-bookmark-x"></i> Penality</li></a>
 

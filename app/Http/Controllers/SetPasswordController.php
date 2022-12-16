@@ -28,8 +28,8 @@ class SetPasswordController extends Controller
         {
             $user->update([
                 'password' => Hash::make($attributes['password']),
-                'status' => 1,
-                'email_status' => 1
+                'status' => true,
+                'email_status' => true
             ]);
     
             $login = new LoginController;

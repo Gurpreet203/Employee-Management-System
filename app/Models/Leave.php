@@ -10,6 +10,10 @@ class Leave extends Model
 {
     use HasFactory;
 
+    const APPROVED = 'Approved';
+    const PENDING = 'Pending';
+    const REJECTED = 'Rejected';
+
     protected $fillable = [
         'user_id',
         'subject',
@@ -20,11 +24,21 @@ class Leave extends Model
 
     //scopes
 
+    public function scopeVisibleTo($query)
+    {
+        return $query->where('user_id', Auth::id());
+    }
+
     public function scopeLatestLeaveDates($query)
     {
-        return $query->where('user_id', Auth::id())
+        return $query->visibleTo()
             ->whereNot('status', 'Rejected')
             ->latest();
+    }
+
+    public function scopePendingLeaves($query)
+    {
+        return $query->where('status', Leave::PENDING);
     }
 
     //Attributes

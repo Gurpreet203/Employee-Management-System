@@ -27,7 +27,7 @@ Route::get('/', function () {
 
         if (Auth::user()->is_employee) {
 
-            return to_route('employee.index');
+            return to_route('employees.index');
         }
 
         return to_route('users.index');
@@ -72,30 +72,30 @@ Route::middleware('auth')->group(function(){
 
     Route::controller(SetPasswordController::class)->group(function(){
 
-            Route::get('/{user:slug}/set-password', 'index')->name('set-password');
+            Route::get('users/{user:slug}/set-password', 'index')->name('set-password');
 
-            Route::post('/{user:slug}/set-password', 'store')->name('set-password.store');
+            Route::post('users/{user:slug}/set-password', 'store')->name('set-password.store');
 
         });
 
     Route::controller(EmployeeController::class)->group(function(){
 
-        Route::get('/employee', 'index')->name('employee.index');
+        Route::get('/employees', 'index')->name('employees.index');
 
-        Route::get('/employee/penalities', 'penality')->name('penality.list');
+        Route::get('/employees/penalities', 'penality')->name('penality.list');
     });
 
-    Route::get('/attendance', [AttendanceController::class, 'store'])->name('attendance');
+    Route::get('/attendances', [AttendanceController::class, 'store'])->name('attendance');
 
     Route::controller(LeaveController::class)->group(function(){
 
-        Route::get('/employee/leaves', 'index')->name('leaves');
+        Route::get('/employees/leaves', 'index')->name('leaves');
 
-        Route::get('/employee/leaves/list', 'show')->name('leaves.show');
+        Route::get('/employees/leaves/list', 'show')->name('leaves.show');
         
-        Route::get('/employee/leaves/create', 'create')->name('leaves.create');
+        Route::get('/employees/leaves/create', 'create')->name('leaves.create');
 
-        Route::post('/employee/leaves/store', 'store')->name('leaves.store');
+        Route::post('/employees/leaves/store', 'store')->name('leaves.store');
     });
 
 });

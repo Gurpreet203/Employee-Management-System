@@ -10,31 +10,39 @@ use Illuminate\Validation\Rule;
 
 class LeaveController extends Controller
 {
+    // list of only pending leaves
+
     public function index()
     {
         return view('users.leaves', [
-            'leaves' => Leave::where('status', 'Pending')
+            'leaves' => Leave::pendingLeaves()
                 ->with('user')
                 ->get()
         ]);
     }
 
+    // list of all leaves except pending leaves
+
     public function show()
     {
         return view('users.leaves-list', [
             'leaves' => Leave::with('user')
-                ->whereNot('status', 'Pending')
+                ->whereNot('status', Leave::PENDING)
                 ->get()
         ]);
     }
 
+    // employee create leaves
+
     public function create()
     {
-        return view('employee.create');
+        return view('employee.leaves.create');
     }
 
     public function store(Request $request)
     {
+        // to check that employee can't request of leaves that alreday exist
+
         if (Leave::LatestLeaveDates()->first())
         {
             $dates = json_decode(Leave::LatestLeaveDates()->first()->leave_dates);
@@ -70,6 +78,6 @@ class LeaveController extends Controller
 
         Leave::create($attributes);
 
-        return to_route('employee.index')->with('success', 'Leave sent To Admin');
+        return to_route('employees.index')->with('success', 'Leave sent To Admin');
     }
 }

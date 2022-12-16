@@ -31,7 +31,7 @@
 
         <div class="mb-3">
             <button type="submit" value="save" name="save" class="btn btn-secondary">Generate Leave</button>
-            <a href="{{ route('employee.index') }}" class="btn btn-outline-secondary">Cancel</a>
+            <a href="{{ route('employees.index') }}" class="btn btn-outline-secondary">Cancel</a>
         </div>
     </form>
 @endsection

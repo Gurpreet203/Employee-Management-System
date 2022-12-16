@@ -16,6 +16,9 @@ class AttendanceController extends Controller
     public function store()
     {
         $now = now()->toDateString();
+
+        //  find the days gap between present and last present or leave to mark absent
+
         if (Attendance::latestDate()->first())
         {
             $previousDate = Attendance::latestDate()
@@ -29,6 +32,8 @@ class AttendanceController extends Controller
         {
             $days = 0;
         }
+
+    // If already attendance done then it works , Also last elsif for mark absent
 
         if (Attendance::leaves()->first())
         {
@@ -53,7 +58,7 @@ class AttendanceController extends Controller
                 Attendance::create([
                     'user_id' => Auth::id(),
                     'date' => $date,
-                    'status' => 'Absent',
+                    'status' => Attendance::ABSENT,
                     'penality' => 10
                 ]);
             });
@@ -62,11 +67,13 @@ class AttendanceController extends Controller
         Attendance::create([
             'user_id' => Auth::id(),
             'date' => $now,
-            'status' => 'Present'
+            'status' => Attendance::PRESENT
         ]);
 
         return back()->with('success', 'Attendance Complete');
     }
+
+// leave function for enter leaves in attendance table
 
     public function leave(Leave $leave)
     {
@@ -82,11 +89,11 @@ class AttendanceController extends Controller
                 Attendance::create([
                     'user_id' => $leave->user_id,
                     'date' => $date,
-                    'status' => 'Leave'
+                    'status' => Attendance::LEAVE
                 ]);
             });
-        
-        Notification::send(User::find($leave->user_id), new LeaveApprovedNotification(Auth::user()));
+        $user = User::find($leave->user_id);
+        Notification::send($user, new LeaveApprovedNotification(Auth::user()));
 
         return to_route('leaves')->with('success', 'Successfully Approved');
     }
