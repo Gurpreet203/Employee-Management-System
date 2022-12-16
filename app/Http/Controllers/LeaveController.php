@@ -78,6 +78,6 @@ class LeaveController extends Controller
 
         Leave::create($attributes);
 
-        return to_route('employees.index')->with('success', 'Leave sent To Admin');
+        return to_route('employees.index')->with('success', 'Successfully Leave Generated');
     }
 }
