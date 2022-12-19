@@ -27,6 +27,7 @@ class LeaveController extends Controller
     {
         return view('users.leaves-list', [
             'leaves' => Leave::with('user')
+                ->search(request(['search']))
                 ->whereNot('status', Leave::PENDING)
                 ->get()
         ]);

@@ -5,6 +5,13 @@
     @include('layout.flashMessages')
 
     <div class="rest-body">
+
+        <form action="{{ route('leaves.show') }}?{{request()->getQueryString()}}" method="get">
+            <div class="d-flex mb-5">
+                <input class="form-control" type="text" name="search" placeholder="Search By Status" value="{{request('search')}}">
+            </div>
+        </form>
+
         <table class="table table-striped">
         <tr>
             <th>Requested By</th>

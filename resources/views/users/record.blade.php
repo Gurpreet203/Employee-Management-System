@@ -7,6 +7,13 @@
     <a href="{{ route('users.index') }}">Go Back</a>
 
     <div class="rest-body">
+
+         <form action="{{ route('users.attendence', $user) }}?{{request()->getQueryString()}}" method="get">
+            <div class="d-flex mb-5">
+                <input class="form-control" type="text" name="search" placeholder="Search By Day, Month or Year" value="{{request('search')}}">
+            </div>
+        </form>
+
         <table class="table table-striped">
         <tr>
             <th>Date</th>

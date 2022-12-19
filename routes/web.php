@@ -87,7 +87,7 @@ Route::middleware('auth')->group(function(){
 
     Route::controller(AttendanceController::class)->group(function(){
 
-        Route::get('/attendances', [AttendanceController::class, 'store'])->name('attendance');
+        Route::get('/attendances', 'store')->name('attendance');
 
         Route::get('/user/{user:slug}/attendences', 'show')->name('users.attendence');
 

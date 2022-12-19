@@ -4,6 +4,12 @@
     @include ('layout.flashMessages')
     <x-nav-bottom heading="Users" btn="Create User" route="users.create"/>
     <div class="rest-body">
+
+        <form action="{{ route('users.index') }}?{{request()->getQueryString()}}" method="get">
+            <div class="d-flex mb-5">
+                <input class="form-control" type="text" name="search" placeholder="Search By Name or Email" value="{{request('search')}}">
+            </div>
+        </form>
         <table class="table table-striped">
         <tr>
             <th>Name</th>

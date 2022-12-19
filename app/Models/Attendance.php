@@ -23,6 +23,14 @@ class Attendance extends Model
 
     // scopes
 
+     public function scopeSearch($query ,array $filter)
+    {
+       $query->when($filter['search'] ?? false, function($query , $search) {
+           return $query
+            ->where('date','like','%'.$search.'%');
+        });
+    }
+
     public function scopeExist($query)
     {
         return $query->where('date', now()->toDateString())

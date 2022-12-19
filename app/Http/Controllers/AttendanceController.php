@@ -17,7 +17,10 @@ class AttendanceController extends Controller
     public function show(User $user)
     {
         return view('users.record', [
-            'attendences' => Attendance::AttendenceRecord($user)->get()
+            'attendences' => Attendance::AttendenceRecord($user)
+            ->search(request(['search']))
+            ->get(),
+            'user' => $user
         ]);
     }
 

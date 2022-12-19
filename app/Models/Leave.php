@@ -24,6 +24,14 @@ class Leave extends Model
 
     //scopes
 
+     public function scopeSearch($query ,array $filter)
+    {
+       $query->when($filter['search'] ?? false, function($query , $search) {
+           return $query
+            ->where('status','like','%'.$search.'%');
+        });
+    }
+
     public function scopeVisibleTo($query)
     {
         return $query->where('user_id', Auth::id());
