@@ -12,6 +12,7 @@ class EmployeeController extends Controller
     {
         return view('employee.index', [
             'leaves' => Leave::visibleTo()
+                ->search(request(['search']))
                 ->latest()
                 ->get()
         ]);

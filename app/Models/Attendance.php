@@ -29,6 +29,11 @@ class Attendance extends Model
            return $query
             ->where('date','like','%'.$search.'%');
         });
+
+        $query->when($filter['sort'] ?? false, function($query , $search) {
+           return $query
+            ->where('status', $search);
+        });
     }
 
     public function scopeExist($query)
@@ -44,9 +49,10 @@ class Attendance extends Model
             ->where('date', now()->toDateString());
     }
 
-    public function scopeLatestDate($query)
+    public function scopeLatestDate($query, User $user)
     {
-        return $query->where('user_id', Auth::id())
+        return $query->where('user_id', $user->id)
+            ->where('date', "<", now()->toDateString())
             ->latest();
     }
 
@@ -59,6 +65,6 @@ class Attendance extends Model
     public function scopeAttendenceRecord($query, User $user)
     {
         return $query->where('user_id', $user->id)
-            ->latest();
+            ->orderBy('date');
     }
 }

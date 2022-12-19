@@ -33,6 +33,7 @@
                     <a href="{{ route('employees.index') }}" id="{{ Request::url() == route('employees.index') ? 'hovereffect' : '' }}"><li><i class="bi bi-list"></i> Leaves</li></a>
                     <a href="{{ route('leaves.create') }}" id="{{ Request::url() == route('leaves.create') ? 'hovereffect' : '' }}"><li><i class="bi bi-files"></i> Create Leave</li></a>
                     <a href="{{ route('penality.list') }}" id="{{ Request::url() == route('penality.list') ? 'hovereffect' : '' }}"><li><i class="bi bi-bookmark-x"></i> Penality</li></a>
+                    <a href="{{ route('users.attendence', Auth::user()) }}" id="{{ Request::url() == route('users.attendence', Auth::user()) ? 'hovereffect' : '' }}"><li><i class="bi bi-card-list"></i> Attendance Record</li></a>
 
                 @endadmin
             </ul>

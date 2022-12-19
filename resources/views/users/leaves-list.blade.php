@@ -6,11 +6,17 @@
 
     <div class="rest-body">
 
-        <form action="{{ route('leaves.show') }}?{{request()->getQueryString()}}" method="get">
-            <div class="d-flex mb-5">
-                <input class="form-control" type="text" name="search" placeholder="Search By Status" value="{{request('search')}}">
-            </div>
-        </form>
+        <div class="dropdown mb-3">
+            <button class="btn-secondary right-dropdowns-btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="border: none;padding: 5px;">
+                {{request('search') ?? 'Sort By Status'}}
+                <span class="dropdown-toggle "></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="{{ route('leaves.show') }}">All</a></li>
+                <li><a class="dropdown-item" href="{{ route('leaves.show') }}?search=Approved">Approved</a></li>
+                <li><a class="dropdown-item" href="{{ route('leaves.show') }}?search=Rejected">Rejected</a></li>
+            </ul>
+        </div>
 
         <table class="table table-striped">
         <tr>

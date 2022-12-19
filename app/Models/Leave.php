@@ -27,8 +27,8 @@ class Leave extends Model
      public function scopeSearch($query ,array $filter)
     {
        $query->when($filter['search'] ?? false, function($query , $search) {
-           return $query
-            ->where('status','like','%'.$search.'%');
+        
+           return $query->where('status', $search);
         });
     }
 

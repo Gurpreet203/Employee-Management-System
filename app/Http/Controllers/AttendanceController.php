@@ -18,7 +18,7 @@ class AttendanceController extends Controller
     {
         return view('users.record', [
             'attendences' => Attendance::AttendenceRecord($user)
-            ->search(request(['search']))
+            ->search(request(['search', 'sort']))
             ->get(),
             'user' => $user
         ]);
@@ -27,12 +27,18 @@ class AttendanceController extends Controller
     public function store()
     {
         $now = now()->toDateString();
+        $time = now()->toTimeString();
+
+        if ($time >= "20:30:00" && $time <= "9:25:00")
+        {
+            return back()->with('error', 'This is not the office timmings');
+        }
 
         //  find the days gap between present and last present or leave to mark absent
 
-        if (Attendance::latestDate()->first())
+        if (Attendance::latestDate(Auth::user())->first())
         {
-            $previousDate = Attendance::latestDate()
+            $previousDate = Attendance::latestDate(Auth::user())
             ->first()->date;
             $previous = Carbon::parse($previousDate);
             $latest = Carbon::parse($now);

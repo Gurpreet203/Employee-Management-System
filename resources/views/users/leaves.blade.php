@@ -6,6 +6,12 @@
 
     <div class="rest-body">
 
+        <form action="{{ route('leaves') }}?{{request()->getQueryString()}}" method="get">
+            <div class="d-flex mb-5">
+                <input class="form-control" type="text" name="search-name" placeholder="Search By Name" value="{{request('search')}}">
+            </div>
+        </form>
+
         <table class="table table-striped">
         <tr>
             <th>Requested By</th>
