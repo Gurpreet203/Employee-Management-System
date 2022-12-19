@@ -47,8 +47,16 @@
                                 <li class="drop-items">
                                     <div class="drop-items-icon">
                                         <i class="bi bi-wrench-adjustable"></i>
-                                        <a href="{{ route('users.edit', $user) }}" confirm="want to proceed ? ">Edit</a>
+                                        <a href="{{ route('users.edit', $user) }}">Edit</a>
                                     </div>
+
+                                </li>
+                                    <div class="drop-items-icon">
+                                        <i class="bi bi-eye"></i>
+                                        <a href="{{ route('users.attendence', $user) }}">Attendence</a>
+                                    </div>
+                                <li>
+                                    
                                 </li>
 
                                 <li>

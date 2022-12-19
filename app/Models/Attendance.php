@@ -21,6 +21,8 @@ class Attendance extends Model
         'penality'
     ];
 
+    // scopes
+
     public function scopeExist($query)
     {
         return $query->where('date', now()->toDateString())
@@ -44,5 +46,11 @@ class Attendance extends Model
     {
         return $query->where('user_id', Auth::id())
             ->where('status', 'Absent');
+    }
+
+    public function scopeAttendenceRecord($query, User $user)
+    {
+        return $query->where('user_id', $user->id)
+            ->latest();
     }
 }

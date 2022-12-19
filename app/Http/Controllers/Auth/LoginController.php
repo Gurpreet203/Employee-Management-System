@@ -21,19 +21,18 @@ class LoginController extends Controller
             'password' => 'required|min:3|max:255'
         ]);
 
-       $user = User::where('email', $attributes['email'])->first();
-
-        if ($user)
+        if (Auth::attempt($attributes))
         {
-            if ($user->status==User::ACTIVE && Auth::attempt($attributes))
+            if (Auth::user()->status == User::ACTIVE)
             {
                 return redirect('/');
             }
-            
-            return back()->with('success','You are Inactive user Or your email or password is incorrect');
+
+            Auth::logout();
+            return back()->with('error', 'You are Inactive user');
         }
 
-        return back()->with('error','User Not Found please Make A Account First');
+        return back()->with('error', 'credentials are wrong');
     }
 
     public function logout()

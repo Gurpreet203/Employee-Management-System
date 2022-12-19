@@ -85,7 +85,14 @@ Route::middleware('auth')->group(function(){
         Route::get('/employees/penalities', 'penality')->name('penality.list');
     });
 
-    Route::get('/attendances', [AttendanceController::class, 'store'])->name('attendance');
+    Route::controller(AttendanceController::class)->group(function(){
+
+        Route::get('/attendances', [AttendanceController::class, 'store'])->name('attendance');
+
+        Route::get('/user/{user:slug}/attendences', 'show')->name('users.attendence');
+
+    });
+
 
     Route::controller(LeaveController::class)->group(function(){
 

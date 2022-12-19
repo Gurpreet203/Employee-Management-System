@@ -13,6 +13,14 @@ use Illuminate\Support\Facades\Notification;
 
 class AttendanceController extends Controller
 {
+
+    public function show(User $user)
+    {
+        return view('users.record', [
+            'attendences' => Attendance::AttendenceRecord($user)->get()
+        ]);
+    }
+
     public function store()
     {
         $now = now()->toDateString();
